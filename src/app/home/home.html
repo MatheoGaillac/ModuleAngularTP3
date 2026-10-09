@@ -1,0 +1,28 @@
+<div class="container color-dark">
+  <div class="col">
+    <p>Un élément de liste</p>
+  </div>
+  <div class="col">
+    <p>Ma liste d'éléments ({{ nbItems }})</p>
+  </div>
+</div>
+<div class="container color-light">
+  <div class="col">
+    <button class="btn" (click)="toggleForm()">Ajouter</button>
+    @if (afficherForm) {
+      <div animate.enter="animation-ajout" animate.leave="animation-suppression">
+        <p class="sm">Un nouvel élément de liste</p>
+        <form>
+          <input type="text" name="txt" id="txt" class="txt" [(ngModel)]="objectifText" />
+          <input type="submit" [value]="btnText" class="btn" (click)="ajoutItem()" />
+        </form>
+        <p>{{ objectifText }}</p>
+      </div>
+    }
+  </div>
+  <div class="col">
+    @for (item of objectifs; track $index) {
+      <p class="life-container" animate.enter="animation-ajout">{{ item }}</p>
+    }
+  </div>
+</div>
