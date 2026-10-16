@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ActiviteService } from '../services/activite.service';
 
 @Component({
   imports: [FormsModule],
@@ -9,21 +10,23 @@ import { Router } from '@angular/router';
   templateUrl: './home.html',
 })
 export class Home {
-  constructor(private monRouteur: Router) {}
+  constructor(
+    private monRouteur: Router,
+    public activiteService: ActiviteService,
+  ) {}
 
   nbItems: number = 4;
   btnText: string = 'Ajouter un élément';
   objectifText: string = '';
-  objectifs: string[] = [];
   afficherForm: boolean = false;
 
   ngOnInit() {
-    this.nbItems = this.objectifs.length;
+    this.nbItems = this.activiteService.objectifs.length;
   }
 
   ajoutItem() {
-    this.objectifs.push(this.objectifText);
-    this.nbItems = this.objectifs.length;
+    this.activiteService.objectifs.push(this.objectifText);
+    this.nbItems = this.activiteService.objectifs.length;
     this.objectifText = '';
     setTimeout(() => {
       this.monRouteur.navigate(['/about']);
@@ -32,5 +35,9 @@ export class Home {
 
   toggleForm() {
     this.afficherForm = !this.afficherForm;
+  }
+
+  afficherDetail(index: number) {
+    this.monRouteur.navigate(['/consultAct', index]);
   }
 }

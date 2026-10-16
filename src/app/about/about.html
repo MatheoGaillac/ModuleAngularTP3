@@ -1,1 +1,6 @@
 <p>about works!</p>
+<ol>
+  @for (item of activiteService.objectifs; track $index) {
+    <li>{{ item }}</li>
+  }
+</ol>
