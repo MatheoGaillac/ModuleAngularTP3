@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   imports: [FormsModule],
@@ -8,6 +9,8 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './home.html',
 })
 export class Home {
+  constructor(private monRouteur: Router) {}
+
   nbItems: number = 4;
   btnText: string = 'Ajouter un élément';
   objectifText: string = '';
@@ -22,6 +25,9 @@ export class Home {
     this.objectifs.push(this.objectifText);
     this.nbItems = this.objectifs.length;
     this.objectifText = '';
+    setTimeout(() => {
+      this.monRouteur.navigate(['/about']);
+    }, 1000);
   }
 
   toggleForm() {
